@@ -124,6 +124,23 @@ app_license = "MIT"
 # 	}
 # }
 
+doc_events = {
+	"ToDo": {
+		"validate": "employee_exit_automation.employee_exit_automation.resignation_workflow.resignation_workflow.block_task_assignment",
+	},
+
+    #  Optional, depending on business requirement:
+    # "Salary Slip": {
+    #     "validate": "employee_exit_automation.employee_exit_automation.resignation_workflow.resignation_workflow.block_salary_slip_for_resigned_employee",
+    # },
+}
+
+scheduler_events = {
+	"daily": [
+		"employee_exit_automation.employee_exit_automation.resignation_workflow.resignation_workflow.daily_check_open_salary_slips"
+	]
+}
+
 # Scheduled Tasks
 # ---------------
 
@@ -144,6 +161,12 @@ app_license = "MIT"
 # 		"employee_exit_automation.tasks.monthly"
 # 	],
 # }
+
+scheduler_events = {
+	"daily": [
+		"employee_exit_automation.employee_exit_automation.resignation_workflow.resignation_workflow.daily_check_open_salary_slips"
+	]
+}
 
 # Testing
 # -------
