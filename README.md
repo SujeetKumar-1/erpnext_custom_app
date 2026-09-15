@@ -198,9 +198,6 @@ Example:
 
 ```python
 doc_events = {
-    "Resignation Letter": {
-        "on_submit": "employee_exit_automation.employee_exit_automation.resignation_workflow.resignation_workflow.handle_employee_resignation"
-    },
     "ToDo": {
         "before_insert": "employee_exit_automation.employee_exit_automation.resignation_workflow.resignation_workflow.block_task_assignment"
     }
@@ -279,7 +276,7 @@ SELECT
     emp.employee_name,
     emp.reports_to AS reporting_manager
 FROM `tabSalary Slip` AS s
-INNER JOIN `tabEmployee` AS emp
+LEFT JOIN `tabEmployee` AS emp
     ON emp.name = s.employee
 WHERE
     s.docstatus = 0
@@ -490,27 +487,6 @@ This ensures that each manager receives a consolidated notification containing a
 
 Email delivery depends on the reporting manager having a valid linked Frappe User in the Employee record's `user_id` field.
 
----
-
-## Potential Improvements
-
-The current implementation can be extended with the following improvements:
-
-- Use parameterized SQL instead of string interpolation for employee filters.
-- Add duplicate-notification prevention.
-- Track the last notification date for each Salary Slip.
-- Add configurable notification recipients.
-- Use Email Templates instead of inline HTML.
-- Add links to each Salary Slip in the email table.
-- Add unit tests for each business function.
-- Add structured logging for scheduler execution.
-- Add a notification status or audit log DocType.
-- Add configurable grace periods after resignation.
-- Support final settlement and payroll completion statuses.
-- Add role-based permission checks.
-- Add automated tests for missing managers and missing user accounts.
-
----
 
 ## Technical Concepts Demonstrated
 
